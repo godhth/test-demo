@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>订单详情 · WeBox</title>
+  <link rel="stylesheet" th:href="@{/css/app.css}"/>
+</head>
+<body>
+<div th:replace="~{fragments/nav :: nav}"></div>
+<main class="container">
+  <a class="back-link" th:href="@{/orders}">← 返回订单列表</a>
+  <h1>订单 #<span th:text="${order.id}">0</span></h1>
+  <section class="order-header">
+    <p>下单时间：<span th:text="${order.createdAt}">-</span></p>
+    <p>配送日期：<span th:text="${order.deliveryDate}">-</span></p>
+    <p>餐段：<span th:text="${order.mealPeriod}">-</span></p>
+    <p>配送地址：<span th:text="${order.deliveryAddress}">-</span></p>
+    <p>状态：<span th:text="${order.status}">-</span></p>
+    <p>合计：¥<span th:text="${order.totalAmount}">0.00</span></p>
+  </section>
+  <h2>订单明细</h2>
+  <table class="cart-table">
+    <thead><tr><th>菜品</th><th>单价</th><th>数量</th><th>小计</th></tr></thead>
+    <tbody>
+      <tr th:each="it : ${order.items}">
+        <td th:text="${it.name}">-</td>
+        <td>¥<span th:text="${it.price}">0.00</span></td>
+        <td th:text="${it.quantity}">0</td>
+        <td>¥<span th:text="${it.price * it.quantity}">0.00</span></td>
+      </tr>
+    </tbody>
+  </table>
+</main>
+</body>
+</html>

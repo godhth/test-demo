@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>结算 · WeBox</title>
+  <link rel="stylesheet" th:href="@{/css/app.css}"/>
+</head>
+<body>
+<div th:replace="~{fragments/nav :: nav}"></div>
+<main class="container checkout">
+  <h1>结算</h1>
+  <div class="checkout-grid">
+    <section class="summary">
+      <h2>订单概要</h2>
+      <table class="cart-table">
+        <thead><tr><th>菜品</th><th>数量</th><th>小计</th></tr></thead>
+        <tbody>
+          <tr th:each="line : ${cart.items}">
+            <td th:text="${line.menuItem.name}">名称</td>
+            <td th:text="${line.quantity}">1</td>
+            <td>¥<span th:text="${line.subtotal}">0.00</span></td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr><td colspan="2"><strong>合计</strong></td><td>¥<span th:text="${cart.total}">0.00</span></td></tr>
+        </tfoot>
+      </table>
+    </section>
+    <section class="checkout-form">
+      <h2>配送信息</h2>
+      <form th:action="@{/checkout}" method="post" th:object="${checkoutForm}">
+        <div class="field">
+          <label for="deliveryDate">配送日期</label>
+          <input id="deliveryDate" type="date" th:field="*{deliveryDate}" required/>
+        </div>
+        <div class="field">
+          <label for="mealPeriod">餐段</label>
+          <select id="mealPeriod" th:field="*{mealPeriod}" required>
+            <option value="breakfast">早餐</option>
+            <option value="lunch">午餐</option>
+            <option value="dinner">晚餐</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="deliveryAddress">配送地址</label>
+          <textarea id="deliveryAddress" rows="3" th:field="*{deliveryAddress}" required></textarea>
+        </div>
+        <button class="btn btn-primary" type="submit">提交订单</button>
+      </form>
+    </section>
+  </div>
+</main>
+</body>
+</html>

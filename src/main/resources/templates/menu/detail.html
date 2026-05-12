@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title th:text="${item.name} + ' · WeBox'">菜品详情 · WeBox</title>
+  <link rel="stylesheet" th:href="@{/css/app.css}"/>
+</head>
+<body>
+<div th:replace="~{fragments/nav :: nav}"></div>
+<main class="container">
+  <a class="back-link" th:href="@{/menu}">← 返回菜单</a>
+  <article class="detail">
+    <img th:src="${item.image}" th:alt="${item.name}" class="detail-img"/>
+    <div class="detail-body">
+      <h1 th:text="${item.name}">名称</h1>
+      <p class="tag" th:text="${item.category}">分类</p>
+      <p class="price">¥<span th:text="${item.price}">0.00</span></p>
+      <p th:text="${item.description}">描述</p>
+      <p class="allergen-tag" th:if="${not #lists.isEmpty(item.allergens)}">
+        ⚠ 含 <span th:text="${#strings.listJoin(item.allergens, '、')}"></span>
+      </p>
+      <form th:action="@{/cart/add}" method="post" class="add-form">
+        <input type="hidden" name="menuItemId" th:value="${item.id}"/>
+        <input type="hidden" name="redirect" th:value="@{|/menu/${item.code}|}"/>
+        <label>
+          数量
+          <input type="number" name="quantity" min="1" value="1"/>
+        </label>
+        <button class="btn btn-primary" type="submit">加入购物车</button>
+      </form>
+    </div>
+  </article>
+</main>
+</body>
+</html>

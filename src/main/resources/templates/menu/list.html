@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>菜单 · WeBox</title>
+  <link rel="stylesheet" th:href="@{/css/app.css}"/>
+</head>
+<body>
+<div th:replace="~{fragments/nav :: nav}"></div>
+<main class="container">
+  <div class="flash" th:if="${flash}" th:text="${flash}"></div>
+  <h1>今日菜单</h1>
+
+  <form class="toolbar" method="get" th:action="@{/menu}" onchange="this.submit()">
+    <label>
+      分类
+      <select name="category">
+        <option value="" th:selected="${selectedCategory == null or selectedCategory == ''}">全部</option>
+        <option th:each="c : ${categories}" th:value="${c}" th:text="${c}"
+                th:selected="${selectedCategory != null and selectedCategory == c}"></option>
+      </select>
+    </label>
+    <label>
+      <input type="checkbox" name="onlyRecommend" value="true" th:checked="${onlyRecommend}"/>
+      只看推荐
+    </label>
+  </form>
+
+  <section class="ai-panel">
+    <h3>AI 推荐（加分项 B）</h3>
+    <form id="ai-form">
+      <div class="field"><input id="ai-input" type="text" placeholder="告诉 AI 你想吃什么，如：想吃辣的，不要花生"/></div>
+      <button id="ai-submit" class="btn btn-primary" type="submit">获取推荐</button>
+    </form>
+    <div id="ai-result" class="ai-result"></div>
+  </section>
+  <script th:src="@{/js/ai.js}"></script>
+
+  <div class="grid" th:if="${not #lists.isEmpty(items)}">
+    <article class="card" th:each="item : ${items}">
+      <a th:href="@{|/menu/${item.code}|}">
+        <img th:src="${item.image}" th:alt="${item.name}" class="card-img"/>
+      </a>
+      <div class="card-body">
+        <h3><a th:href="@{|/menu/${item.code}|}" th:text="${item.name}">名称</a></h3>
+        <p class="tag" th:text="${item.category}">分类</p>
+        <p class="price">¥<span th:text="${item.price}">0.00</span></p>
+        <p class="allergen-tag" th:if="${not #lists.isEmpty(item.allergens)}">
+          ⚠ 含 <span th:text="${#strings.listJoin(item.allergens, '、')}"></span>
+        </p>
+        <form th:action="@{/cart/add}" method="post" style="margin:0;">
+          <input type="hidden" name="menuItemId" th:value="${item.id}"/>
+          <input type="hidden" name="quantity" value="1"/>
+          <input type="hidden" name="redirect" value="/menu"/>
+          <button class="btn btn-primary" type="submit">加入购物车</button>
+        </form>
+      </div>
+    </article>
+  </div>
+  <p th:if="${#lists.isEmpty(items)}">暂无菜品。</p>
+</main>
+</body>
+</html>

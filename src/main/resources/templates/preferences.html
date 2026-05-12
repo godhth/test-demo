@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>偏好设置 · WeBox</title>
+  <link rel="stylesheet" th:href="@{/css/app.css}"/>
+</head>
+<body>
+<div th:replace="~{fragments/nav :: nav}"></div>
+<main class="container">
+  <div class="flash" th:if="${flash}" th:text="${flash}"></div>
+  <h1>偏好设置</h1>
+  <form th:action="@{/preferences}" method="post" th:object="${preferenceForm}">
+    <section>
+      <h2>过敏原（将自动过滤含此成分的菜品）</h2>
+      <div class="allergen-list">
+        <label th:each="a : ${allAllergens}" class="allergen-item">
+          <input type="checkbox" name="allergens" th:value="${a}"
+                 th:checked="${form.allergens != null and #lists.contains(form.allergens, a)}"/>
+          <span th:text="${a}"></span>
+        </label>
+      </div>
+    </section>
+    <section>
+      <h2>展示选项</h2>
+      <label>
+        <input type="checkbox" name="recommendOnly" value="true" th:checked="${form.recommendOnly}"/>
+        默认只看推荐菜品
+      </label>
+    </section>
+    <button class="btn btn-primary" type="submit">保存</button>
+  </form>
+</main>
+</body>
+</html>

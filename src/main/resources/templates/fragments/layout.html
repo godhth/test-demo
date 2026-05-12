@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(title)">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title th:text="${title} + ' · WeBox'">WeBox</title>
+  <link rel="stylesheet" th:href="@{/css/app.css}"/>
+</head>
+<body>
+<header th:fragment="nav" class="nav">
+  <a class="brand" th:href="@{/menu}">WeBox</a>
+  <a th:href="@{/menu}">菜单</a>
+  <a th:href="@{/orders}">我的订单</a>
+  <a th:href="@{/preferences}">偏好</a>
+  <span style="flex:1"></span>
+  <a th:href="@{/cart}">购物车 (<span th:text="${cartCount}">0</span>)</a>
+  <span th:if="${currentUser != null}" th:text="${currentUser.name}" style="margin-left:12px;"></span>
+  <form th:if="${currentUser != null}" th:action="@{/logout}" method="post" style="margin:0 0 0 12px;">
+    <button class="btn" type="submit">登出</button>
+  </form>
+</header>
+<footer th:fragment="foot" class="foot">
+  <small>WeBox &copy; 2026</small>
+</footer>
+</body>
+</html>

@@ -14,7 +14,7 @@
 - Package root: `com.webox.webox`
 - Price type: `java.math.BigDecimal`
 - Time type: `java.time.Instant` / `java.time.LocalDate`
-- Every task ends with `./mvnw -q test` (unless noted) and a commit
+- Every task ends with `/Applications/IntelliJ IDEA.app/Contents/plugins/maven/lib/maven3/bin/mvn -q test` (unless noted) and a commit
 - Commit messages follow `<type>: <subject>` (`feat`, `test`, `chore`, `docs`, `refactor`)
 - Use @superpowers:test-driven-development for every task that has tests
 - Use @superpowers:verification-before-completion before declaring any task done
@@ -127,7 +127,7 @@ Append these lines if not present: `target/`, `.idea/`, `*.iml`, `.DS_Store`, `H
 
 **Step 6: Run Maven test to verify scaffolding works**
 
-Run: `./mvnw -q test` (if wrapper missing, first run `mvn -q -N io.takari:maven:wrapper -Dmaven=3.9.6` or `mvn -q wrapper:wrapper`).
+Run: `/Applications/IntelliJ IDEA.app/Contents/plugins/maven/lib/maven3/bin/mvn -q test` (if wrapper missing, first run `mvn -q -N io.takari:maven:wrapper -Dmaven=3.9.6` or `mvn -q wrapper:wrapper`).
 Expected: `BUILD SUCCESS`, `contextLoads` passes.
 
 **Step 7: Commit**
@@ -210,7 +210,7 @@ class MenuItemRepositoryTest {
 
 **Step 4: Run and expect FAIL first, then make PASS by writing entities correctly**
 
-Run: `./mvnw -q -Dtest=MenuItemRepositoryTest test`
+Run: `/Applications/IntelliJ IDEA.app/Contents/plugins/maven/lib/maven3/bin/mvn -q -Dtest=MenuItemRepositoryTest test`
 Expected after entity code is written: PASS.
 
 **Step 5: Commit**
@@ -266,7 +266,7 @@ class PasswordEncoderTest {
 
 **Step 2: Run and verify FAIL**
 
-Run: `./mvnw -q -Dtest=PasswordEncoderTest test`
+Run: `/Applications/IntelliJ IDEA.app/Contents/plugins/maven/lib/maven3/bin/mvn -q -Dtest=PasswordEncoderTest test`
 Expected: compilation failure (class missing).
 
 **Step 3: Implement**
@@ -303,7 +303,7 @@ public class PasswordEncoder {
 
 **Step 4: Run and verify PASS**
 
-Run: `./mvnw -q -Dtest=PasswordEncoderTest test`
+Run: `/Applications/IntelliJ IDEA.app/Contents/plugins/maven/lib/maven3/bin/mvn -q -Dtest=PasswordEncoderTest test`
 Expected: PASS.
 
 **Step 5: Commit**
@@ -357,7 +357,7 @@ Note: last assertion requires `/menu` returning 200; at this task it may not yet
 
 **Step 2: Run FAIL**
 
-Run: `./mvnw -q -Dtest=AuthInterceptorTest test`
+Run: `/Applications/IntelliJ IDEA.app/Contents/plugins/maven/lib/maven3/bin/mvn -q -Dtest=AuthInterceptorTest test`
 
 **Step 3: Implement**
 
@@ -419,7 +419,7 @@ Use `MockMvc` + `@SpringBootTest` + `TestEntityManager` or real repo (preferred:
 
 **Step 4: Run PASS**
 
-Run: `./mvnw -q -Dtest=AuthControllerTest test`
+Run: `/Applications/IntelliJ IDEA.app/Contents/plugins/maven/lib/maven3/bin/mvn -q -Dtest=AuthControllerTest test`
 
 **Step 5: Commit**
 
@@ -531,7 +531,7 @@ class MenuServiceTest {
 
 **Step 5: Run all tests PASS**
 
-Run: `./mvnw -q test`
+Run: `/Applications/IntelliJ IDEA.app/Contents/plugins/maven/lib/maven3/bin/mvn -q test`
 
 **Step 6: Commit**
 
@@ -824,7 +824,7 @@ git commit -m "feat: global exception handling and error pages"
 
 **Step 2: Run PASS**
 
-Run: `./mvnw -q -Dtest=SmokeE2ETest test`
+Run: `/Applications/IntelliJ IDEA.app/Contents/plugins/maven/lib/maven3/bin/mvn -q -Dtest=SmokeE2ETest test`
 
 **Step 3: Commit**
 
@@ -843,15 +843,15 @@ git commit -m "test: end-to-end smoke for register→order flow"
 **Step 1: Write README sections**
 
 - Project intro (from PRD)
-- Build: `./mvnw spring-boot:run`
+- Build: `/Applications/IntelliJ IDEA.app/Contents/plugins/maven/lib/maven3/bin/mvn spring-boot:run`
 - Access: `http://localhost:8080`
 - H2 Console: `/h2-console` (jdbc url `jdbc:h2:mem:webox`)
 - AI config: `export DASHSCOPE_API_KEY=...` then rerun; without key AI panel shows "AI 暂不可用，请稍后再试"
-- Test: `./mvnw test`
+- Test: `/Applications/IntelliJ IDEA.app/Contents/plugins/maven/lib/maven3/bin/mvn test`
 
 **Step 2: Run full suite**
 
-Run: `./mvnw -q test`
+Run: `/Applications/IntelliJ IDEA.app/Contents/plugins/maven/lib/maven3/bin/mvn -q test`
 Expected: all green.
 
 **Step 3: Manual smoke**

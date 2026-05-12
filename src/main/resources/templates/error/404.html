@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>页面不存在 · WeBox</title>
+  <link rel="stylesheet" th:href="@{/css/app.css}"/>
+</head>
+<body>
+<div th:replace="~{fragments/nav :: nav}"></div>
+<main class="container error-page">
+  <h1>404 · 页面不存在</h1>
+  <p th:if="${message}" th:text="${message}"></p>
+  <a class="btn btn-primary" th:href="@{/menu}">返回首页</a>
+</main>
+</body>
+</html>
