@@ -29,7 +29,7 @@ public class UserService {
         User u = new User();
         u.setEmail(form.getEmail());
         u.setName(form.getName());
-        u.setSalt(salt);
+        u.setPasswordSalt(salt);
         u.setPasswordHash(hash);
         u.setCreatedAt(Instant.now());
         u = userRepository.save(u);
@@ -38,7 +38,7 @@ public class UserService {
 
     public Optional<LoginUser> login(String email, String password) {
         return userRepository.findByEmail(email)
-                .filter(u -> passwordEncoder.matches(password, u.getSalt(), u.getPasswordHash()))
+                .filter(u -> passwordEncoder.matches(password, u.getPasswordSalt(), u.getPasswordHash()))
                 .map(u -> new LoginUser(u.getId(), u.getEmail(), u.getName()));
     }
 }

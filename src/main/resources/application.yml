@@ -12,6 +12,13 @@ spring:
   h2:
     console:
       enabled: true
+  mvc:
+    throw-exception-if-no-handler-found: true
+  web:
+    resources:
+      add-mappings: true
+  thymeleaf:
+    cache: false
 webox:
   ai:
     base-url: https://dashscope.aliyuncs.com/compatible-mode/v1
